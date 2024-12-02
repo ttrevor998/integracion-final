@@ -1,0 +1,83 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                sh 'rm -rf react-app && git clone https://github.com/user/react-app.git react-app' // Replace with your actual repo URL
+            }
+        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                dir('react-app') { // Navigate to the cloned repo directory
+                    sh '''
+                        ls -la
+                        node --version
+                        npm --version
+                        npm ci
+                        npm run build
+                        ls -la
+                    '''
+                }
+            }
+        }
+        stage('Pruebas') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                dir('react-app') {
+                    sh '''
+                        test -f build/index.html
+                        npm test
+                    '''
+                }
+            }
+        }
+        stage('Create Docker Image') {
+            steps {
+                dir('react-app') {
+                    writeFile file: 'Dockerfile', text: '''
+                        FROM nginx:alpine
+                        COPY build /usr/share/nginx/html
+                        EXPOSE 80
+                        CMD ["nginx", "-g", "daemon off;"]
+                    '''
+                    sh '''
+                        docker build -t react-app-webserver .
+                    '''
+                }
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    sh '''
+                        # Stop and remove any existing container
+                        docker rm -f react-app-container || true
+                        
+                        # Run the container
+                        docker run -d --name react-app-container -p 8080:80 react-app-webserver
+                    '''
+                }
+            }
+        }
+    }
+    post {
+        always {
+            sh '''
+                echo "Cleaning up Docker resources..."
+                docker system prune -af || true
+            '''
+        }
+    }
+}
