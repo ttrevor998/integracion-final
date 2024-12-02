@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                sh 'rm -rf react-app && git clone https://github.com/user/react-app.git react-app' // Replace with your actual repo URL
+                sh 'rm -rf react-app && git clone https://github.com/ttrevor998/integracion-final react-app' // Replace with your actual repo URL
             }
         }
         stage('Build') {
@@ -61,13 +61,13 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    sh '''
+                     sh '''
                         # Stop and remove any existing container
                         docker rm -f react-app-container || true
-                        
-                        # Run the container
-                        docker run -d --name react-app-container -p 8080:80 react-app-webserver
-                    '''
+                
+                        # Run the container on a different port, e.g., 8081
+                        docker run -d --name react-app-container -p 8081:80 react-app-webserver
+                        '''
                 }
             }
         }
