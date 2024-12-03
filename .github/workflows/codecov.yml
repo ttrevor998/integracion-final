@@ -43,5 +43,7 @@ jobs:
       - name: Install Dependencies and Build
         run: |
           pwd
+          ls -la
+          pwd
           #npm install
           #npm run build
