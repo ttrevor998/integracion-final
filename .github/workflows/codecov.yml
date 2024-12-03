@@ -13,8 +13,12 @@ jobs:
     name: Clone Repository
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - name: Remove existing folder and clone repo
+        run: |
+          rm -rf react-app
+          git clone https://github.com/ttrevor998/integracion-final react-app
+          cd react-app
+          ls -la
 
   build:
     name: Build Application
