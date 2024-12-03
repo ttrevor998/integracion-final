@@ -40,7 +40,8 @@ pipeline {
                         # test -f build/index.html
                         # npm test
                         test -f build/index.html
-                        npm test
+                        npm test -- --coverage --detectOpenHandles
+                        # npm test
                         # npm install
                         # npx playwright install
                         # npx playwright test
