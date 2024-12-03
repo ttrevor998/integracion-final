@@ -31,15 +31,16 @@ jobs:
       - name: List Directory Contents
         run: | 
           ls -la
+          git clone https://github.com/ttrevor998/integracion-final react-app
           pwd
-          #cd react-app
+          cd react-app
           ls -la
-          cd ..
-          ls -la
-          pwd
-          cd ..
-          ls -la 
-          pwd
+          #cd ..
+          #ls -la
+          #pwd
+          #cd ..
+          #ls -la 
+          #pwd
           
       - name: Setup Node.js
         uses: actions/setup-node@v3
