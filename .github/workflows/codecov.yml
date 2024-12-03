@@ -56,3 +56,13 @@ jobs:
           pwd
           npm install
           npm run build
+  test:
+    name: Build Application
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: List Directory Contents
+        run: | 
+          ls -la
+          pwd
+          npm test
