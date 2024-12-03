@@ -17,20 +17,18 @@ jobs:
         run: |
           rm -rf react-app
           ls -la
-          git clone https://github.com/ttrevor998/integracion-final #react-app
+          git clone https://github.com/ttrevor998/integracion-final react-app
           pwd
           ls -la
           
-  build:
-    name: Build Application
+  build-and-test:
+    name: Build and Test Application
     runs-on: ubuntu-latest
     needs: clone-repo
     steps:
       - name: List Directory Contents
-        run: | 
+        run: |
           ls -la
-          git clone https://github.com/ttrevor998/integracion-final react-app
-          pwd
           cd react-app
           ls -la
           
@@ -39,39 +37,17 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install Dependencies and Build
+      - name: Install Dependencies
         run: |
-          pwd
-          ls -la
           cd react-app
-          ls -la
-          pwd
           npm install
+          
+      - name: Build Application
+        run: |
+          cd react-app
           npm run build
 
-      - name: Upload entire project directory
-        uses: actions/upload-artifact@v3
-        with:
-          name: project-artifacts
-          path: react-app/*
-
-  test:
-    name: Pruebas
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download project artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: project-artifacts
-          
-      - name: List Directory Contents
-        run: |
-          ls -la
-          pwd
-
-      - name: Install Dependencies and Run Tests
+      - name: Run Tests
         run: |
           cd react-app
-          npm install  # Reinstall dependencies if necessary
-          npm run test  # Run tests
+          npm run test
