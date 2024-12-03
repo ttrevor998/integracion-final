@@ -12,3 +12,8 @@ test('renders learn Jenkins link', () => {
   const linkElement = screen.getByText(/learn Jenkins/i);
   expect(linkElement).toBeInTheDocument();
 });
+
+afterAll(done => {
+  done()
+})
+
