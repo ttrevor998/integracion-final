@@ -15,6 +15,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "test:coverage": "react-scripts test --coverage --watchAll=false",
     "build": "CI=false && react-scripts build",
     "test": "react-scripts test --testResultsProcessor=\"jest-junit\"",
     "eject": "react-scripts eject"
