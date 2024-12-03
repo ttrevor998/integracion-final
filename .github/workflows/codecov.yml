@@ -29,8 +29,12 @@ jobs:
     needs: clone-repo
     steps:
       - name: List Directory Contents
-        run: ls -la
-
+        run: | 
+          ls -la
+          pwd
+          cd react-app
+          ls -la
+          
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
