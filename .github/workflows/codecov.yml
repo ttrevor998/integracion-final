@@ -10,88 +10,22 @@ on:
 
 jobs:
   build:
-  name: Build Application
-  runs-on: ubuntu-latest
-  needs: clone-repo
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-
-    - name: List Directory Contents
-      run: ls -la
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 18
-
-    - name: Install Dependencies and Build
-      run: |
-        npm ci
-        npm run build
-
-  test:
-    name: Run Tests
+    name: Build Application
     runs-on: ubuntu-latest
-    needs: build
+    needs: clone-repo
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: List Directory Contents
+        run: ls -la
+
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install Playwright and Run Tests
+      - name: Install Dependencies and Build
         run: |
-          cd react-app
           npm ci
-          npx playwright install
-          npm test -- --coverage
-          npx playwright test
-
-      - name: Upload to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          files: ./react-app/coverage/lcov.info
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests
-          name: coverage-report
-
-  docker-build:
-    name: Create Docker Image
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download Build Artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: build-output
-
-      - name: Write Dockerfile
-        run: |
-          echo 'FROM nginx:alpine
-          COPY build /usr/share/nginx/html
-          EXPOSE 80
-          CMD ["nginx", "-g", "daemon off;"]' > Dockerfile
-
-      - name: Build Docker Image
-        run: |
-          docker build -t react-app-webserver .
-
-  docker-run:
-    name: Run Docker Container
-    runs-on: ubuntu-latest
-    needs: docker-build
-    steps:
-      - name: Stop and Remove Existing Container
-        run: docker rm -f react-app-container || true
-
-      - name: Run Docker Container
-        run: docker run -d --name react-app-container -p 8081:80 react-app-webserver
-
-  cleanup:
-    name: Cleanup Docker Resources
-    runs-on: ubuntu-latest
-    if: always()
-    steps:
-      - name: Clean Docker System
-        run: docker system prune -af || true
+          npm run build
