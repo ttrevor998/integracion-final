@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import SentryPrueba from './components/sentryPrueba';
 function App() {
   return (
     <div className="App">
@@ -12,12 +12,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn Jenkins on Udemy
+          Proyecto integracion continua con Jenkins
         </a>
       </header>
-      <p>
-          Application version: 1
-      </p>
+      <SentryPrueba />
     </div>
   );
 }
