@@ -7,9 +7,9 @@ afterEach(() => {
 });
 
 
-test('renders learn Jenkins link', () => {
+test('renders Proyecto integracion continua con Jenkins', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn Jenkins/i);
+  const linkElement = screen.getByText(/Proyecto integracion continua con Jenkins/i);
   expect(linkElement).toBeInTheDocument();
 });
 
