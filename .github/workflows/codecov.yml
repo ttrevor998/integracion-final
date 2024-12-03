@@ -46,11 +46,20 @@ jobs:
     runs-on: ubuntu-latest
     container: node:18-alpine
     steps:
-      - name: Run Tests and Coverage
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Dependencies
         run: |
           cd react-app
-          test -f build/index.html
-          npm test -- --coverage
+          npm install
+          npx playwright install  # Instalar Playwright y navegadores necesarios
+
+      - name: Run Playwright Tests
+        run: |
+          cd react-app
+          npm test -- --coverage  # Si tus tests incluyen cobertura de código
+          npx playwright test     # Ejecutar pruebas e2e
 
       - name: Upload to Codecov
         uses: codecov/codecov-action@v3

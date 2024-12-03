@@ -37,8 +37,12 @@ pipeline {
             steps {
                 dir('react-app') {
                     sh '''
+                        # test -f build/index.html
+                        # npm test
                         test -f build/index.html
-                        npm test
+                        npm install
+                        npx playwright install
+                        npx playwright test
                     '''
                 }
             }
