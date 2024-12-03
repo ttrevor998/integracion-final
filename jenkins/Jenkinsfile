@@ -40,9 +40,10 @@ pipeline {
                         # test -f build/index.html
                         # npm test
                         test -f build/index.html
-                        npm install
-                        npx playwright install
-                        npx playwright test
+                        npm test
+                        # npm install
+                        # npx playwright install
+                        # npx playwright test
                     '''
                 }
             }
