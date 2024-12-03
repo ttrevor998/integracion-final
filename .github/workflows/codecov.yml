@@ -51,6 +51,8 @@ jobs:
         run: |
           pwd
           ls -la
+          cd react-app
+          ls -la
           pwd
           #npm install
           #npm run build
