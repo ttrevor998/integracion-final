@@ -20,6 +20,14 @@
     "test": "react-scripts test --testResultsProcessor=\"jest-junit\"",
     "eject": "react-scripts eject"
   },
+  "jest": {
+  "collectCoverageFrom": [
+    "src/**/*.{js,jsx}",          
+    "!src/reportWebVitals.js",    
+    "!src/index.js",             
+    "!src/components/sentryPrueba.js" 
+  ]
+},
   "eslintConfig": {
     "extends": [
       "react-app",
