@@ -32,7 +32,7 @@ jobs:
         run: | 
           ls -la
           pwd
-          cd react-app
+          #cd react-app
           ls -la
           
       - name: Setup Node.js
@@ -42,5 +42,6 @@ jobs:
 
       - name: Install Dependencies and Build
         run: |
-          npm install
-          npm run build
+          pwd
+          #npm install
+          #npm run build
