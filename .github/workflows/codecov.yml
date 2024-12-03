@@ -33,7 +33,7 @@ jobs:
 
       - name: Build React Application
         run: |
-          cd react-app
+          #cd react-app
           ls -la
           node --version
           npm --version
