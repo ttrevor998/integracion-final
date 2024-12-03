@@ -20,7 +20,9 @@ jobs:
           git clone https://github.com/ttrevor998/integracion-final #react-app
           pwd
           ls -la
+          #cd react-app
           
+
   build:
     name: Build Application
     runs-on: ubuntu-latest
@@ -33,6 +35,12 @@ jobs:
           pwd
           cd react-app
           ls -la
+          #cd ..
+          #ls -la
+          #pwd
+          #cd ..
+          #ls -la 
+          #pwd
           
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -48,28 +56,13 @@ jobs:
           pwd
           npm install
           npm run build
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifacts
-          path: react-app/build
-
   test:
     name: Pruebas
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Download build artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: build-artifacts
-          
       - name: List Directory Contents
-        run: |
+        run: | 
           ls -la
           pwd
-
-      - name: Run Tests
-        run: |
           npm test
