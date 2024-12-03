@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import SentryPrueba from './components/sentryPrueba';
+//import SentryPrueba from './components/sentryPrueba';
 function App() {
   return (
     <div className="App">
@@ -15,7 +15,7 @@ function App() {
           Proyecto integracion continua con Jenkins
         </a>
       </header>
-      <SentryPrueba />
+     {/* <SentryPrueba />*/}
     </div>
   );
 }
