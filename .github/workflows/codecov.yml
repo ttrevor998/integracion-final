@@ -16,19 +16,18 @@ jobs:
       - name: Remove existing folder and clone repo
         run: |
           rm -rf react-app
-          ls -la
           git clone https://github.com/ttrevor998/integracion-final react-app
           pwd
           ls -la
-          
+
   build-and-test:
     name: Build and Test Application
     runs-on: ubuntu-latest
     needs: clone-repo
     steps:
-      - name: List Directory Contents
+      - name: Clone Repository Again
         run: |
-          ls -la
+          git clone https://github.com/ttrevor998/integracion-final react-app
           cd react-app
           ls -la
           
