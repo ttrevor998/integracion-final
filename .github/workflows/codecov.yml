@@ -16,7 +16,10 @@ jobs:
       - name: Remove existing folder and clone repo
         run: |
           rm -rf react-app
+          ls -la
           git clone https://github.com/ttrevor998/integracion-final react-app
+          pwd
+          ls -la
           cd react-app
           ls -la
 
