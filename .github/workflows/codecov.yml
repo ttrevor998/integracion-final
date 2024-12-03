@@ -54,5 +54,5 @@ jobs:
           cd react-app
           ls -la
           pwd
-          #npm install
-          #npm run build
+          npm install
+          npm run build
