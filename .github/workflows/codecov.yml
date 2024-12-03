@@ -24,7 +24,7 @@ jobs:
   build:
     name: Build Application
     runs-on: ubuntu-latest
-    container: node:18-alpine
+    #container: node:18-alpine
     steps:
       - name: Setup Node.js
         uses: actions/setup-node@v3
