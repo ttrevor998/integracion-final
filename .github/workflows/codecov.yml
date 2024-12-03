@@ -17,11 +17,11 @@ jobs:
         run: |
           rm -rf react-app
           ls -la
-          git clone https://github.com/ttrevor998/integracion-final react-app
+          git clone https://github.com/ttrevor998/integracion-final #react-app
           pwd
           ls -la
-          cd react-app
-          ls -la
+          #cd react-app
+          
 
   build:
     name: Build Application
@@ -34,6 +34,12 @@ jobs:
           pwd
           #cd react-app
           ls -la
+          cd ..
+          ls -la
+          pwd
+          cd ..
+          ls -la 
+          pwd
           
       - name: Setup Node.js
         uses: actions/setup-node@v3
